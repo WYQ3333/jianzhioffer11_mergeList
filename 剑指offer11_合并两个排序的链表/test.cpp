@@ -54,9 +54,19 @@ public:
 };
 
 
+void TestFunc1(){
+	Solution s1;
+	s1.PushBack(1);
+	s1.PushBack(2);
+	s1.PushBack(3);
+	s1.PushBack(4);
+	s1.PushBack(5);
+	s1.PushBack(6);
 
+}
 
 int main(){
+	TestFunc1();
 	system("pause");
 	return 0;
 }
