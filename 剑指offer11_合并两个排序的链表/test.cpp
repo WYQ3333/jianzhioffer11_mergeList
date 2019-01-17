@@ -104,7 +104,7 @@ public:
 		if (cur2 == nullptr&&cur1 != nullptr){
 			Ncur->next = cur1;
 		}
-
+		
 		return NpHead;
 	}
 
@@ -114,6 +114,7 @@ public:
 
 
 void TestFunc1(){
+	ListNode* cur = nullptr;
 	Solution s1;
 	s1.PushBack(1);
 	s1.PushBack(2);
@@ -121,6 +122,14 @@ void TestFunc1(){
 	s1.PushBack(4);
 	s1.PushBack(5);
 	s1.PushBack(6);
+
+	cout << "第一次尾插所得链表为：";
+	cur = s1._pHead;
+	while (cur){
+		cout << cur->val << "-->";
+		cur = cur->next;
+	}
+	cout << endl;
 
 	Solution s2;
 	s2.PushBack(3);
@@ -130,9 +139,25 @@ void TestFunc1(){
 	s2.PushBack(7);
 	s2.PushBack(8);
 
-	Solution s3;
-	s3.Merge(s1._pHead, s2._pHead);
 
+	cout << "第二次尾插所得链表为：";
+	cur = s2._pHead;
+	while (cur){
+		cout << cur->val << "-->";
+		cur = cur->next;
+	}
+	cout << endl;
+
+
+	Solution s3;
+	cur = s3.Merge(s1._pHead, s2._pHead);
+
+	cout << "第三次合并有序链表所得链表为：";
+	while (cur){
+		cout << cur->val << "-->";
+		cur = cur->next;
+	}
+	cout << endl;
 }
 
 int main(){
