@@ -37,11 +37,13 @@ public:
 		if (_pHead == nullptr){
 			_pHead = NewNode;
 		}
-		ListNode* cur = _pHead;
-		while (cur){
-			cur = cur->next;
+		else{
+			ListNode* cur = _pHead;
+			while (cur->next){
+				cur = cur->next;
+			}
+			cur->next = NewNode;
 		}
-		cur = NewNode;
 	}
 	
 	//ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
