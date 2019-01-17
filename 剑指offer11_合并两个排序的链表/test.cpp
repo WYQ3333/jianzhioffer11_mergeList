@@ -308,7 +308,7 @@ void TestFunc3(){
 
 
 	Solution s3;
-	cur = s3.Merge2(s1._pHead, s2._pHead);
+	cur = s3.Merge3(s1._pHead, s2._pHead);
 
 	cout << "第三次合并有序链表所得链表为：";
 	while (cur){
