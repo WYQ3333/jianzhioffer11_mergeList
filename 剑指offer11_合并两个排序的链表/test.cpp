@@ -132,6 +132,46 @@ public:
 		return newhead;
 	}
 
+	ListNode* Merge3(ListNode* pHead1, ListNode* pHead2)
+	{
+		if (!pHead1)
+			return pHead2;
+		if (!pHead2)
+			return pHead1;
+		ListNode* Head;
+		ListNode* p;
+		//取较小值作头结点 
+		if (pHead1->val <= pHead2->val){
+			Head = pHead1;
+			pHead1 = pHead1->next;
+		}
+		else{
+			Head = pHead2;
+			pHead2 = pHead2->next;
+		}
+		//开始遍历合并 
+		p = Head;                                                   //p为合并后的链表的工作指针 
+		while (pHead1&&pHead2){                       //当有一个链表到结尾时，循环结束 
+			if (pHead1->val <= pHead2->val){          //如果链表1的结点小于链表2的结点 
+				p->next = pHead1;                            //取这个结点加入合并链表 
+				pHead1 = pHead1->next;                 //链表1后移一位 
+				p = p->next;                                      //工作指针后移一位 
+			}
+			else{                                               //否则取链表2的结点 
+				p->next = pHead2;
+				pHead2 = pHead2->next;
+				p = p->next;
+			}
+		}
+		if (pHead1 == NULL)           //链表1遍历完了 
+			p->next = pHead2;         //如果链表2也遍历完了，则pHead2=NULL 
+		if (pHead2 == NULL)            //链表2遍历完了 
+			p->next = pHead1;			///如果链表1也遍历完了，则pHead1=NULL 
+
+		_pHead = Head;
+		return Head;
+	}
+
 public:
 	ListNode * _pHead;
 };
@@ -231,8 +271,55 @@ void TestFunc2(){
 	cout << endl;
 }
 
+void TestFunc3(){
+	ListNode* cur = nullptr;
+	Solution s1;
+	s1.PushBack(1);
+	s1.PushBack(2);
+	s1.PushBack(3);
+	s1.PushBack(4);
+	s1.PushBack(5);
+	s1.PushBack(6);
+
+	cout << "第一次尾插所得链表为：";
+	cur = s1._pHead;
+	while (cur){
+		cout << cur->val << "-->";
+		cur = cur->next;
+	}
+	cout << endl;
+
+	Solution s2;
+	s2.PushBack(3);
+	s2.PushBack(4);
+	s2.PushBack(5);
+	s2.PushBack(6);
+	s2.PushBack(7);
+	s2.PushBack(8);
+
+
+	cout << "第二次尾插所得链表为：";
+	cur = s2._pHead;
+	while (cur){
+		cout << cur->val << "-->";
+		cur = cur->next;
+	}
+	cout << endl;
+
+
+	Solution s3;
+	cur = s3.Merge2(s1._pHead, s2._pHead);
+
+	cout << "第三次合并有序链表所得链表为：";
+	while (cur){
+		cout << cur->val << "-->";
+		cur = cur->next;
+	}
+	cout << endl;
+}
+
 int main(){
-	TestFunc2();
+	TestFunc3();
 	system("pause");
 	return 0;
 }
