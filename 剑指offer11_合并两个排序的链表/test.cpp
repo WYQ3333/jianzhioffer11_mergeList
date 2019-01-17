@@ -68,29 +68,43 @@ public:
 		}
 
 		while (cur1 != nullptr&&cur2 != nullptr){
-			if (cur1->val <= cur2->val){
+			if (cur1 != nullptr&&cur2 != nullptr&&cur1->val <= cur2->val){
 				if (NpHead == nullptr){
 					NpHead = cur1;
+					Ncur = NpHead;
+					cur1 = cur1->next;
+					NpHead->next = nullptr;
 				}
 				else{
 					Ncur->next = cur1;
-					Ncur->next->next = nullptr;
 					cur1 = cur1->next;
+					Ncur->next->next = nullptr;
 					Ncur = Ncur->next;
 				}
 			}
-			if (cur1->val > cur2->val){
+			if (cur1 != nullptr&&cur2 != nullptr&&cur1->val > cur2->val){
 				if (NpHead == nullptr){
 					NpHead = cur2;
+					Ncur = NpHead;
+					cur2 = cur2->next;
+					NpHead->next = nullptr;
 				}
 				else{
 					Ncur->next = cur2;
-					Ncur->next->next = nullptr;
 					cur2 = cur2->next;
+					Ncur->next->next = nullptr;
 					Ncur = Ncur->next;
 				}
 			}
 		}
+
+		if (cur1 == nullptr&&cur2 != nullptr){
+			Ncur->next = cur2;
+		}
+		if (cur2 == nullptr&&cur1 != nullptr){
+			Ncur->next = cur1;
+		}
+
 		return NpHead;
 	}
 
@@ -107,6 +121,17 @@ void TestFunc1(){
 	s1.PushBack(4);
 	s1.PushBack(5);
 	s1.PushBack(6);
+
+	Solution s2;
+	s2.PushBack(3);
+	s2.PushBack(4);
+	s2.PushBack(5);
+	s2.PushBack(6);
+	s2.PushBack(7);
+	s2.PushBack(8);
+
+	Solution s3;
+	s3.Merge(s1._pHead, s2._pHead);
 
 }
 
