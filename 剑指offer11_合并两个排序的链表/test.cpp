@@ -49,7 +49,7 @@ public:
 	//合并两个有序单链表
 	//方法一
 
-	ListNode* Merge(ListNode* pHead1, ListNode* pHead2)
+	ListNode* Merge1(ListNode* pHead1, ListNode* pHead2)
 	{
 		ListNode* NpHead = nullptr;
 		ListNode* Ncur = NpHead;
@@ -108,6 +108,30 @@ public:
 		return NpHead;
 	}
 
+	ListNode* Merge2(ListNode* pHead1, ListNode* pHead2)
+	{
+		if (pHead1 == NULL)
+			return pHead2;
+		else if (pHead2 == NULL)
+			return pHead1;
+
+		ListNode* newhead = NULL;
+
+		if (pHead1->val<pHead2->val)
+
+		{
+			newhead = pHead1;
+			newhead->next = Merge2(pHead1->next, pHead2);
+		}
+		else
+		{
+			newhead = pHead2;
+			newhead->next = Merge2(pHead1, pHead2->next);
+		}
+		_pHead = newhead;
+		return newhead;
+	}
+
 public:
 	ListNode * _pHead;
 };
@@ -150,7 +174,54 @@ void TestFunc1(){
 
 
 	Solution s3;
-	cur = s3.Merge(s1._pHead, s2._pHead);
+	cur = s3.Merge1(s1._pHead, s2._pHead);
+
+	cout << "第三次合并有序链表所得链表为：";
+	while (cur){
+		cout << cur->val << "-->";
+		cur = cur->next;
+	}
+	cout << endl;
+}
+
+void TestFunc2(){
+	ListNode* cur = nullptr;
+	Solution s1;
+	s1.PushBack(1);
+	s1.PushBack(2);
+	s1.PushBack(3);
+	s1.PushBack(4);
+	s1.PushBack(5);
+	s1.PushBack(6);
+
+	cout << "第一次尾插所得链表为：";
+	cur = s1._pHead;
+	while (cur){
+		cout << cur->val << "-->";
+		cur = cur->next;
+	}
+	cout << endl;
+
+	Solution s2;
+	s2.PushBack(3);
+	s2.PushBack(4);
+	s2.PushBack(5);
+	s2.PushBack(6);
+	s2.PushBack(7);
+	s2.PushBack(8);
+
+
+	cout << "第二次尾插所得链表为：";
+	cur = s2._pHead;
+	while (cur){
+		cout << cur->val << "-->";
+		cur = cur->next;
+	}
+	cout << endl;
+
+
+	Solution s3;
+	cur = s3.Merge2(s1._pHead, s2._pHead);
 
 	cout << "第三次合并有序链表所得链表为：";
 	while (cur){
@@ -161,7 +232,7 @@ void TestFunc1(){
 }
 
 int main(){
-	TestFunc1();
+	TestFunc2();
 	system("pause");
 	return 0;
 }
